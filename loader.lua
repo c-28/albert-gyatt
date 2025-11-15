@@ -11,7 +11,7 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 
 local Window = Fluent:CreateWindow({
     Title = "PregnantHUB",
-    SubTitle = "and asscheeks",
+    SubTitle = "and asscheeks and update 2",
     TabWidth = 70,
     Size = UDim2.fromOffset(580, 460),
     Acrylic = false,
@@ -76,6 +76,14 @@ pregnancy:OnChanged(function()
         weld.Part1 = pregnant
         weld.Parent = pregnant
         weld.C0 = CFrame.new(0,0.3,-0.9)
+        if kaicenat and kaicenat.Value then
+            for _, bbb in pairs(Enum.NormalId:GetEnumItems()) do
+                local kaicenatdiddyblud = Instance.new("Decal")
+                kaicenatdiddyblud.Face = bbb
+                kaicenatdiddyblud.Texture = "rbxassetid://92158335976019"
+                kaicenatdiddyblud.Parent = pregnant
+            end
+        end
     else
         if pregnant then 
             pregnant:Destroy() pregnant = nil weld = nil
@@ -111,8 +119,18 @@ asscheeks:OnChanged(function()
         leftcheek.Color = asscheekscolor.Value
         rightcheek.Color = asscheekscolor.Value
         if kaicenat and kaicenat.Value then
-            leftcheek.Texture = "rbxassetid://92158335976019"
-            rightcheek.Texture = "rbxassetid://92158335976019"
+            for _, bbb in pairs(Enum.NormalId:GetEnumItems()) do
+                local kaicenatdiddyblud = Instance.new("Decal")
+                kaicenatdiddyblud.Face = bbb
+                kaicenatdiddyblud.Texture = "rbxassetid://92158335976019"
+                kaicenatdiddyblud.Parent = leftcheek
+            end
+            for _, bbb in pairs(Enum.NormalId:GetEnumItems()) do
+                local kaicenatdiddyblud = Instance.new("Decal")
+                kaicenatdiddyblud.Face = bbb
+                kaicenatdiddyblud.Texture = "rbxassetid://92158335976019"
+                kaicenatdiddyblud.Parent = rightcheek
+            end
         end
         leftweld.Part0 = lp.HumanoidRootPart
         leftweld.Part1 = leftcheek
