@@ -218,10 +218,10 @@ player.CharacterAdded:Connect(function(a)
         twerking:Play()
     end
     if pregnancy and pregnancy.Value then
-        pregnancy:SetValue(false) pregnancy:SetValue(true) -- idk if this is a good way to do it but it works
+        pregnancy:SetValue(false) task.wait(.5) pregnancy:SetValue(true) -- idk if this is a good way to do it but it works
     end
     if asscheeks and asscheeks.Value then
-        asscheeks:SetValue(false) asscheeks:SetValue(true)
+        asscheeks:SetValue(false) task.wait(.5) asscheeks:SetValue(true)
     end
 end)
 
