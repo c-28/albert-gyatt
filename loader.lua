@@ -1,8 +1,13 @@
 if not game:IsLoaded() then game.Loaded:Wait() end
 --// locals
 
-local lp = game.Players.LocalPlayer.Character
-local pregnant, weld, leftcheek, rightcheek, leftweld, rightweld = nil
+local player = game.Players.LocalPlayer
+local lp = player.Character or player.CharacterAdded:Wait()
+
+player.CharacterAdded:Connect(function(char)
+    lp = char
+end)
+local pregnant, weld, leftcheek, rightcheek, leftweld, rightweld, twerking = nil
 
 --// ui
 
@@ -11,7 +16,7 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 
 local Window = Fluent:CreateWindow({
     Title = "PregnantHUB",
-    SubTitle = "and asscheeks and update 2",
+    SubTitle = "update 4",
     TabWidth = 70,
     Size = UDim2.fromOffset(580, 460),
     Acrylic = false,
@@ -20,15 +25,25 @@ local Window = Fluent:CreateWindow({
 })
 
 local Tabs = {
+    Changelogs = Window:AddTab({ Title = "Changelogs"}),
     Pregnancy = Window:AddTab({ Title = "Pregnancy"}),
     Asscheeks = Window:AddTab({ Title = "Asscheeks"}),
     Kaicenat = Window:AddTab({ Title = "Kaicenat"}),
+    Twerking = Window:AddTab({ Title = "Twerking"}),
     Settings = Window:AddTab({ Title = "Settings"})
 }
 
 Tabs.Pregnancy:AddParagraph({Title = "Pregnancy",Content = "Pregnant features"})
 Tabs.Asscheeks:AddParagraph({Title = "Asscheeks",Content = "Get big asscheeks in roblox"})
 Tabs.Kaicenat:AddParagraph({Title = "Kai cenat",Content = "W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W"})
+Tabs.Twerking:AddParagraph({Title = "Twerking",Content = "Twerk"})
+
+--// changelog
+
+Tabs.Changelogs:AddParagraph({Title = "update 4",Content = "fixed it not working on respawn"})
+Tabs.Changelogs:AddParagraph({Title = "update 3",Content = "ass cheeks move with your ass now and twerking"})
+Tabs.Changelogs:AddParagraph({Title = "update 2",Content = "kai cenat pregnancy and asscheeks and bug fixes"})
+Tabs.Changelogs:AddParagraph({Title = "update 1",Content = "release with pregnant and asscheeks"})
 
 --// script
 
@@ -132,16 +147,16 @@ asscheeks:OnChanged(function()
                 kaicenatdiddyblud.Parent = rightcheek
             end
         end
-        leftweld.Part0 = lp.HumanoidRootPart
+        leftweld.Part0 = lp.LowerTorso
         leftweld.Part1 = leftcheek
-        rightweld.Part0 = lp.HumanoidRootPart
+        rightweld.Part0 = lp.LowerTorso
         rightweld.Part1 = rightcheek
         leftcheek.Parent = lp
         rightcheek.Parent = lp
         leftweld.Parent = leftcheek
         rightweld.Parent = rightcheek
-        leftweld.C0 = CFrame.new(-0.8,-0.9,1)
-        rightweld.C0 = CFrame.new(0.8,-0.9,1)
+        leftweld.C0 = CFrame.new(-0.8,-0.2,1)
+        rightweld.C0 = CFrame.new(0.8,-0.2,1)
     else
         if leftcheek then 
             leftcheek:Destroy() leftcheek = nil leftweld = nil
@@ -160,6 +175,54 @@ end)
 asscheekscolor:OnChanged(function()
     if leftcheek then leftcheek.Color = asscheekscolor.Value end
     if rightcheek then rightcheek.Color = asscheekscolor.Value end
+end)
+
+--// twerking
+
+--// twerking
+
+local twerk = Tabs.Twerking:AddToggle("twerk", {Title = "Twerk", Default = false})
+local twerkspeed = Tabs.Twerking:AddSlider("twerkspeed", {Title = "Twerk Speed", Default = 1, Min = 0.1, Max = 5, Rounding = 1})
+
+twerkspeed:OnChanged(function(a)
+    if twerking then twerking:AdjustSpeed(a) end
+end)
+
+lp.Humanoid.Died:Connect(function()
+    if twerking then twerking:Stop() twerking = nil end
+end)
+
+twerk:OnChanged(function()
+    if twerk.Value then
+        local animation = Instance.new("Animation")
+        animation.AnimationId = "rbxassetid://71970944840848"
+        twerking = lp.Humanoid:LoadAnimation(animation)
+        twerking.Looped = true
+        twerking:AdjustSpeed(twerkspeed.Value)
+        twerking:Play()
+    else
+        if twerking then twerking:Stop() twerking = nil end
+    end
+end)
+
+--// respawn
+
+player.CharacterAdded:Connect(function(a) 
+    lp = a task.wait(2)
+    if twerk and twerk.Value then
+        local animation = Instance.new("Animation")
+        animation.AnimationId = "rbxassetid://71970944840848"
+        twerking = lp.Humanoid:LoadAnimation(animation)
+        twerking.Looped = true
+        twerking:AdjustSpeed(twerkspeed.Value)
+        twerking:Play()
+    end
+    if pregnancy and pregnancy.Value then
+        pregnancy:SetValue(false) pregnancy:SetValue(true) -- idk if this is a good way to do it but it works
+    end
+    if asscheeks and asscheeks.Value then
+        asscheeks:SetValue(false) asscheeks:SetValue(true)
+    end
 end)
 
 --// addons
